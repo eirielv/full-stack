@@ -1,0 +1,127 @@
+/*Scafold */
+header{
+    max-height: 80px;
+    background-image: url("../images/dyrene-i-hakkebakkeskogen.png");
+}
+
+body{
+    background-color: saddlebrown;
+}
+
+table{
+    color: white;
+
+}
+
+/*Text's and Paragaph's*/
+p {
+    overflow-wrap: break-word;
+    color: papayawhip;
+    font-style: italic;
+}
+
+h2 {
+    color: white;
+    font-style: italic;
+}
+
+
+h3{
+    color: white;
+    font-style: italic;
+}
+
+h1 {
+    color: white;
+    font-style: italic;
+}
+
+/*Menu Bar*/
+ul li{
+    list-style: none;
+    display: inline-block;
+    line-height: 10px;
+    text-decoration: none;
+}
+
+ul li a {
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    padding: 0 20px;
+}
+
+
+/*Grid And grid box's*/
+.grid {
+    display: grid;
+    height: 800px;
+    grid-template: repeat(2, minmax(100px, 500px)) / repeat(3, minmax(100px, 500px));
+    gap: 10px;
+    background-color: saddlebrown;
+}
+
+.a{
+    center;
+}
+
+.b {
+    width: inherit;
+    grid-column: 2;
+    grid-row: 1/ span 2;
+}
+
+.box {
+    padding: 10px;
+    background-color: sandybrown;
+    border-radius: 5px;
+}
+
+.footTable{
+    width: 100%;
+}
+
+/*Menu Grid*/
+.menu_grid {
+    display: grid;
+    height: inherit;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.logo {
+    height: 80px;
+    width: auto;
+    float: right;
+}
+
+.top-bar {
+    text-align: center;
+    overflow: inherit;
+}
+
+.contact{
+    background-color: rgba(21,128,12,0.8);
+    margin-top:10px;
+}
+
+#nutt{
+    height: inherit;
+    width: inherit;
+    float: right;
+}
+
+#dyr{
+    height: auto;
+    width: 200px;
+
+}
+
+.left-colum {
+    column-width: 20%;
+}
+
+#email{
+    background-color: white;
+    co
+}
+
