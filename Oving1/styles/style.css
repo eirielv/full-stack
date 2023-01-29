@@ -1,8 +1,11 @@
-/*Scafold */
-header{
-    max-height: 80px;
-    background-image: url("../images/dyrene-i-hakkebakkeskogen.png");
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
 }
+
+
 
 body{
     background-color: saddlebrown;
@@ -37,55 +40,120 @@ h1 {
 }
 
 /*Menu Bar*/
-ul li{
+nav {
+
+}
+
+ul a{
     list-style: none;
     display: inline-block;
     line-height: 10px;
     text-decoration: none;
+    width: auto;
 }
 
-ul li a {
+
+li a {
+    float:left;
+    display: inline;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    border-right: 1px solid #bbb;
+}
+
+li a:last-child {
+    border-right: none;
+}
+
+/*
+li a {
+
     text-decoration: none;
     font-size: 20px;
     color: white;
     padding: 0 20px;
 }
+ */
+
+li a:hover{
+    background-color: #111;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: auto 3fr 1fr;
+}
 
 
 /*Grid And grid box's*/
-.grid {
+.content {
     display: grid;
-    height: 800px;
     grid-template: repeat(2, minmax(100px, 500px)) / repeat(3, minmax(100px, 500px));
+    margin-top: 10px;
     gap: 10px;
     background-color: saddlebrown;
+    font-size: 1.8vw;
+
 }
 
-.a{
-    center;
-}
-
-.b {
-    width: inherit;
-    grid-column: 2;
-    grid-row: 1/ span 2;
-}
-
-.box {
+.item {
     padding: 10px;
     background-color: sandybrown;
     border-radius: 5px;
 }
 
-.footTable{
-    width: 100%;
+.menu_item {
+
 }
 
-/*Menu Grid*/
-.menu_grid {
+.footer{
     display: grid;
-    height: inherit;
     grid-template-columns: 1fr 1fr 1fr;
+    background-color: rgba(21,128,12,0.8);
+    margin-top:10px;
+    align-content: center;
+    font-size: 1.4vw;
+
+}
+
+.a{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    text-align: center;
+    place-items: center;
+
+}
+
+.b {
+    width: inherit;
+    grid-column: 2;
+    grid-row: 1/3;
+}
+
+.c {
+    width: inherit;
+    grid-column: 3;
+    grid-row: 1/3;
+
+}
+
+.d {
+    grid-column: 1;
+    align-content: center;
+}
+
+
+.listElement{
+
+}
+/*Menu Grid*/
+
+
+.top-bar {
+    text-align: center;
+    overflow: inherit;
 }
 
 .logo {
@@ -94,14 +162,47 @@ ul li a {
     float: right;
 }
 
-.top-bar {
-    text-align: center;
-    overflow: inherit;
+.footTable{
+    width: 100%;
 }
 
-.contact{
-    background-color: rgba(21,128,12,0.8);
-    margin-top:10px;
+.my_buttons{
+   width: 100%;
+    height: 20px;
+}
+
+.my_buttons:hover {
+    background-color: white;
+    color: black;
+}
+.counter{
+    align-content: center;
+}
+
+.count-seen{
+    background-color: white;
+    height: 100%;
+    place-items: center;
+
+}
+
+#random-word-liste{
+
+}
+
+#random-word{
+    background-color: white;
+    max-width: content-box;
+    height: 100%;
+    width: 100%;
+}
+
+.random-num p{
+    color: #111111;
+}
+
+#count{
+    color: red;
 }
 
 #nutt{
@@ -110,18 +211,34 @@ ul li a {
     float: right;
 }
 
-#dyr{
+#add{
     height: auto;
-    width: 200px;
+    width: inherit;
+    max-width: 100%;
+    border-radius: 5%;
 
 }
 
-.left-colum {
-    column-width: 20%;
+#headerImg{
+    background: url("../images/dyrene-i-hakkebakkeskogen.png") no-repeat center ;
+    height: auto;
+    width: inherit;
+    background-size: cover;
+    border: red 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 #email{
     background-color: white;
-    co
 }
 
+#button-hide{
+    width: 20vw;
+    height: 20vw;
+    border-radius: 100%;
+}
+
+#sett{
+    text-align: center;
+}
