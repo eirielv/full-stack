@@ -5,35 +5,55 @@
         <title>Dyrene I Hakkebakkeskogen</title>
         <link rel="stylesheet" href="styles/style.css">
     </head>
-    <body>
-        <header>
-            <div class="menu_grid">
-                <div class="navi menu">
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Sanger</a></li>
-                        <li><a href="#">About Us</a></li>
-                    </ul>
-                </div>
-                <div class="top-bar">
-                    <h1>
-                        Dyrene i Hakkebakkeskogen
-                    </h1>
-                </div>
-                <div class="navi logo">
-                    <img id=nutt src="images/hasselnætt.png" alt="Picture of a nutt">
-                </div>
+    <body class="container">
+        <header class="menu_item" id="headerImg">
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Sanger</a></li>
+                    <li><a href="#">About Us</a></li>
+                </ul>
+            </nav>
+            <div class="top-bar">
+                <h1>
+                </h1>
+            </div>
+            <div class="logo">
+                <img id=nutt src="images/hasselnætt.png" alt="Picture of a nutt">
             </div>
         </header>
-        <div class="grid">
-            <div class="box a">
-                <img id="dyr" src="images/dyrene-i-afrika.webp" alt="Picture of animales">
+
+        <div class="content">
+
+            <div class="item a">
+                <div class ="counter">
+                    <p id="sett">
+                        Hvor mange ganger har du sett på hakkebakkeskogen?
+                    </p>
+                    <div class="count-seen">
+                        <table id="button-table">
+                            <td><button id="increment" class="my_buttons" onclick="incrementButton()">Λ</button></td>
+                            <td><div id="count">0</div></td>
+                            <td><button id="decrement" class="my_buttons" onclick="decrementButton()">V</button></td>
+                            <script src="script/index.js"></script>
+                        </table>
+                    </div>
+                </div>
+                <div id="random-word">
+                    <button id="random" class="my_buttons" onclick="randomWord()">V</button>
+                    <ul id="random-word-liste">
+
+                    </ul>
+                </div>
             </div>
-            <div class="box b">
+
+            <div class="item b">
                 <h2>
                     Pepperkakebake Sang
+
                 </h2>
-                <p>
+                <p id="hide_text">
+                    <br>
                     Når en pepperkakebaker, baker pepperbakekaker
                     Tar han først en stekegryte og en kilo margarin
                     Oppi gryta smelter smøret, og det neste han må gjøre
@@ -53,30 +73,24 @@
                     Åh, hjelpe meg der ser jeg halen på reven!
                     Nå har jeg deg nå! Huh? Bare vent!
 
-                    <h3>HATSJO!!!!!!</h3>
-
-
-                    <!--<video controls>
-                        <source type="video/mp4" src="">
-                    </video>
-                    <source type="video/mp4" src=https://play.tv2.no/c-more/c-more-filmer/dyrene-i-hakkebakkeskogen-1405622.html>-->
+                    <h1>HATSJO!!!!!!</h1>
                 </p>
-
-                <audio autoplay>
-                    <source type="audio/mp3" src="images/peppekakebaker.mp3">
-                    Your browser does not support this file
-                </audio>
             </div>
-            <div class="box c">C</div>
-            <div class="box d">D</div>
-            <div class="box f">F</div>
+
+            <div class="item c">
+                <h3 align="center">!VISES PÅ KINO!</h3>
+                <img id="add" src="images/dyrene-i-afrika.png" alt="Picture of animales">
+            </div>
+            <div class="item d">
+                <button id="button-hide" onclick="hideText()">Gjemme teksten</button>
+            </div>
         </div>
-        <footer>
-            <div class="contact">
+
+        <footer class="footer">
+            <div>
                 <table id=#clear-text class="footTable">
                     <tr class="column-width">
                         <th colspan="2">Contact</th>
-                        <td></td>
                     </tr>
                     <tr class="column-width">
                         <th scope="row">Name:</th>
@@ -90,14 +104,14 @@
                         <th scope="row">E-post</th>
                         <td id="email"><a href="mailto:doktor-dofensmitch@gmail.com">doktor-dofentsmitch@gmail.com</a></td>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td id="center-text">
-                            © 2023 Dr.Dof | Brukervilkår | Personv@rnerklæring og informasjonskapsler
-                        </td>
-                    </tr>
                 </table>
+            </div>
+            <div>
+                <p>© 2023 Dr.Dof | Brukervilkår | Personvernerklæring og informasjonskapsler</p>
+                <audio autoplay muted>
+                    <source type="audio/mp3" src="images/peppekakebaker.mp3">
+                    Your browser does not support this file
+                </audio>
             </div>
         </footer>
     </body>
