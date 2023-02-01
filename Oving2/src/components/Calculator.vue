@@ -71,6 +71,7 @@ export default {
 .calcbtn{
   background-color: #ec9e69;
   border: 1px solid ;
+  text-align: center;
 
 }
 
