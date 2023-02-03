@@ -1,17 +1,13 @@
 <script setup>
 import Calculator from './components/Calculator.vue'
+import Logg from "@/components/Logg.vue";
 </script>
 
 <template>
   <div id="layout">
-    <header>
-      <div class="wrapper">
-        header
-      </div>
-    </header>
-
     <main>
-      <Calculator/>
+        <Calculator/>
+        <Logg/>
     </main>
   </div>
 </template>
