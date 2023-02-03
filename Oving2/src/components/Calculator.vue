@@ -1,26 +1,32 @@
 
 <template>
   <div class="calculator">
-    <div class="display"> {{content || '--'}} </div>
-    <div class="calcbtn edits" id="clear">C</div>
-    <div class="calcbtn edits" id="answer">ANS</div>
-    <div class="calcbtn edits" id="delete">DEL</div>
-    <div class="calcbtn operation"  id="pluss">+</div>
-    <div class="calcbtn" id="siffer1">1</div>
-    <div class="calcbtn" id="siffer2">2</div>
-    <div class="calcbtn" id="siffer3">3</div>
-    <div class="calcbtn operation" id="minus">-</div>
-    <div class="calcbtn" id="siffer4">4</div>
-    <div class="calcbtn" id="siffer5">5</div>
-    <div class="calcbtn" id="siffer6">6</div>
-    <div class="calcbtn operation" id="multiply">x</div>
-    <div class="calcbtn" id="siffer7">7</div>
-    <div class="calcbtn" id="siffer8">8</div>
-    <div class="calcbtn" id="siffer9">9</div>
-    <div class="calcbtn operation" id="devide">÷</div>
-    <div class="calcbtn" id="siffer0">0</div>
-    <div class="calcbtn" id="comma">,</div>
-    <div class="calcbtn equ" id="equals">=</div>
+    <div class="display">
+      <p id="displayContent">
+        {{content || '--'}}
+      </p>
+    </div>
+
+    <!--<button class="edits" @click = clear() id="clear">C</button>-->
+    <button class="calcbtn edits" @click = clear() id="clear">C</button>
+    <button class="calcbtn edits" @click = "getAnswer()" id="answer">ANS</button>
+    <button class="calcbtn edits" @click = "del()" id="delete">DEL</button>
+    <button class="calcbtn operation" @click="add()" id="pluss">+</button>
+    <button class="calcbtn" @click ="append('1')" id="siffer1">1</button>
+    <button class="calcbtn" @click ="append('2')" id="siffer2">2</button>
+    <button class="calcbtn" @click ="append('3')" id="siffer3">3</button>
+    <button class="calcbtn operation" @click="minus()" id="minus">-</button>
+    <button class="calcbtn" @click ="append('4')" id="siffer4">4</button>
+    <button class="calcbtn" @click ="append('5')" id="siffer5">5</button>
+    <button class="calcbtn" @click ="append('6')" id="siffer6">6</button>
+    <button class="calcbtn operation" @click="multiply()" id="multiply">x</button>
+    <button class="calcbtn" @click ="append('7')" id="siffer7">7</button>
+    <button class="calcbtn" @click ="append('8')" id="siffer8">8</button>
+    <button class="calcbtn" @click ="append('9')" id="siffer9">9</button>
+    <button class="calcbtn operation" @click="divide()" id="devide">÷</button>
+    <button class="calcbtn" @click ="append('0')" id="siffer0">0</button>
+    <button class="calcbtn" @click ="comma" id="comma">,</button>
+    <button class="calcbtn equ" @click="equal()" id="equals">=</button>
 
   </div>
 </template>
@@ -30,8 +36,128 @@ export default {
   name: "Calculator",
   data(){
     return {
-      content: ''
+      input: null,
+      content: '',
+      answer: null,
+      operator: null,
+      operatorClicked: false,
+      endOfEquation: false,
+      eqution: [],
+
     }
+  },
+
+  methods: {
+    clear() {
+      //this.$store.commit('CHANGE_END_OF_EQUATION', true);
+      this.endOfEquation = true;
+      this.$store.dispatch('setBool', this.endOfEquation)
+      this.$store.state.endOfEquation = true;
+      this.content = '';
+      this.input = null;
+      this.answer = null;
+      this.operator = null;
+      this.operatorClicked = false;
+      this.endOfEquation = false;
+    },
+
+    getAnswer(){
+      this.content = this.answer;
+      this.equationString(this.content);
+    },
+
+    del(){
+      if(this.content !== this.answer){
+        let contentLength = this.content.length;
+        this.content.at(-1)
+        this.content = this.content.substring(0,contentLength - 1)
+      }
+
+    },
+
+    error(){
+      let storeCont = this.content
+      this.content = '--ERROR--'
+
+      setTimeout(function (){
+        console.log(1)
+      }, 1000,this.content = '--ERROR--', this.content = storeCont);
+
+      this.content = storeCont;
+    },
+
+    append(number) {
+      if(this.operatorClicked){
+        this.input = this.content;
+        this.content ='';
+        this.operatorClicked = false;
+      }
+
+      this.content = `${this.content}${number}`;
+      this.equationString(this.content);
+    },
+
+    comma(){
+      if (this.content.indexOf(',') === -1){
+        this.append(',')
+      }
+      else{
+        this.error()
+      }
+
+    },
+    multiply(){
+      if(this.operator !== null){
+        this.equal()
+      }
+      this.operatorClicked = true;
+      this.operator = (a, b) => a * b;
+      this.input = this.content
+      this.equationString('x')
+    },
+    divide(){
+      if(this.operator !== null){
+        this.equal()
+      }
+      this.operatorClicked = true;
+      this.operator = (a, b) => a / b;
+      this.input = this.content
+      this.equationString('÷')
+    },
+    minus() {
+      if(this.operator !== null){
+        this.equal()
+      }
+      this.operatorClicked = true;
+      this.operator = (a, b) => a - b;
+      this.input = this.content
+      this.equationString('-')
+    },
+    add(){
+      if(this.operator !== null){
+        this.equal()
+      }
+      this.operatorClicked = true;
+      this.operator = (a, b) => a + b;
+      this.input = this.content
+      this.equationString('+')
+    },
+    equal(){
+      this.content = `${this.operator(parseFloat(this.content), parseFloat(this.input))}`;
+      this.input = null;
+      this.answer = this.content
+      this.equationString(`= ${this.content}`)
+      this.$store.dispatch('setBool', this.endOfEquation)
+      //this.$store.commit('CHANGE_END_OF_EQUATION', true);
+    },
+    equationString(equ){
+      this.eqution.push(equ)
+      this.submit(equ)
+    },
+    submit(equ) {
+      this.$store.dispatch('createEquationList', equ)
+    }
+
   }
 }
 
@@ -40,59 +166,105 @@ export default {
 
 
 <style scoped>
-.calculator{
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: minmax(50px, auto);
-  font-size: 50px;
-  border: 2px solid black;
-  border-radius: 25px;
-  margin: 0 auto;
-  text-align: justify-all;
+
+/*
+  button{
+    background: #ededed;
+    border: 1px solid #ccc;
+    padding: 10px 30px;
+    cursor: pointer;
+  }
+
+  button:focus{
+    background: #e5e5e5;
+    outline: none;
+    -webkit-box-shadow: inset 0 0 5px #c1c1c1;
+    -moz-box-shadow: inset 0 0 5px #c1c1c1;
+    box-shadow: inset 0 0 5px #c1c1c1;
+  }
+  /*
+ */
+
+  /*
+  ---KLASSER---
+   */
+
+  .calculator{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(50px, auto);
+    font-size: 50px;
+    border: 2px solid black;
+    border-radius: 25px;
+    margin: 0 auto;
+    box-shadow: 7px 6px 28px 1px rgba(0,0,0,0.24);
 
   /*
     TODO Få tekst til å være i center
    */
 
-}
-.display{
-  grid-column: 1/5;
-  background-color: #ffff8f;
-  color: #7a4579;
-  min-height: 100px;
-  border-top-left-radius:25px;
-  border-top-right-radius:25px;
+  }
+  .display{
+    grid-column: 1/5;
+    background-color: #ffff8f;
+    color: #7a4579;
+    min-height: 100px;
+    border-top-left-radius:25px;
+    border-top-right-radius:25px;
+    padding-left: 10px;
+
+    /*
+    TODO Få min-height til å være dynamisk
+     */
+  }
+  /*
+  --Alle knappene--
+   */
+  .calcbtn{
+    background-color: rgba(234, 160, 109, 0.89);
+    border: 1px solid ;
+    text-align: center;
+    box-shadow: 7px 6px 28px 1px rgba(0,0,0,0.24);
+    cursor: pointer;
+    transition: 0.2s all;
+    font-size: 50px;
+  }
+
 
   /*
-  TODO Få min-height til å være dynamisk
+  Alle operasjoner
    */
+  .operation{
+    background-color: #d56073;
+  }
+.operation:focus{
+  transform: scale(0.90);
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 24);
 }
+  /*
+  Erlik knappen
+   */
+  .equ{
+    background-color: #7a4579;
+    color: #ffff8f;
+    border-bottom-right-radius: 25px;
+  }
+  /*
+  Knapper tilhørende endringer
+   */
+  .edits{
+    background-color: #e78f4b;
+    font-size: 40px;
+  }
+  /*
+  ---ID---
+   */
 
-.calcbtn{
-  background-color: #ec9e69;
-  border: 1px solid ;
-  text-align: center;
-
-}
-
-.operation{
-  background-color: #d56073;
-}
-
-.equ{
-  background-color: #7a4579;
-  color: #ffff8f;
-  border-bottom-right-radius: 25px;
-}
-
-.edits{
-  background-color: #e78f4b;
-  font-size: 40px;
-}
-
-#siffer0{
-  grid-column: 1/3;
-  border-bottom-left-radius: 25px;
-}
-
+  /*
+  0 knappen
+   */
+  #siffer0{
+    grid-column: 1/3;
+    border-bottom-left-radius: 25px;
+  }
 </style>
