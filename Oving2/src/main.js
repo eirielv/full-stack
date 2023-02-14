@@ -6,4 +6,5 @@ import store from "@/store";
 
 createApp(App)
     .use(store)
+
     .mount('#app')

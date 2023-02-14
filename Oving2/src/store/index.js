@@ -6,33 +6,33 @@ export default createStore({
      */
     
     state: {
-        equations: [],
-        endOfEquation: false,
+        logs:{
+            equations: [],
+        },
+    },
+
+    getters: {
+        getLogEquation(state){
+            return state.logs.equations
+        }
     },
     /*
     mutations updates the state
      */
     mutations: {
-        SET_EQUATION(state, equation){
-            state.equations.push(equation);
+        SET_EQUATION(state,equation){
+            state.logs.equations.push(equation);
         },
-        CHANGE_END_OF_EQUATION(state, bool){
-            state.endOfEquation = bool;
-
-        }
+        CLEAR_LOGG(state){
+            state.logs.equations = []
+        },
     },
 /*
 actions calls mutations
  */
     actions: {
         createEquationList({ commit }, list){
-            if(state.endOfEquation === true){
-                commit('SET_EQUATION', list)
-            }
-
-        },
-        setBool({ commit }, bool){
-            commit('CHANGE_END_OF_EQUATION', bool)
+            return commit('SET_EQUATION', list)
         },
 
         fetchEquations(context) {
@@ -41,8 +41,4 @@ actions calls mutations
             context.commit('SET_EQUATION', )
         }
     },
-    getters: {
-
-    }
-
 })

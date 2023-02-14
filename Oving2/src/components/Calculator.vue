@@ -8,7 +8,7 @@
     </div>
 
     <!--<button class="edits" @click = clear() id="clear">C</button>-->
-    <button class="calcbtn edits" @click = clear() id="clear">C</button>
+    <button class="calcbtn edits" @click = "clear()" id="clear">C</button>
     <button class="calcbtn edits" @click = "getAnswer()" id="answer">ANS</button>
     <button class="calcbtn edits" @click = "del()" id="delete">DEL</button>
     <button class="calcbtn operation" @click="add()" id="pluss">+</button>
@@ -26,7 +26,7 @@
     <button class="calcbtn operation" @click="divide()" id="devide">÷</button>
     <button class="calcbtn" @click ="append('0')" id="siffer0">0</button>
     <button class="calcbtn" @click ="comma" id="comma">,</button>
-    <button class="calcbtn equ" @click="equal()" id="equals">=</button>
+    <button class="calcbtn equ" @click="submit()" id="equals">=</button>
 
   </div>
 </template>
@@ -41,7 +41,6 @@ export default {
       answer: null,
       operator: null,
       operatorClicked: false,
-      endOfEquation: false,
       eqution: [],
 
     }
@@ -49,21 +48,17 @@ export default {
 
   methods: {
     clear() {
-      //this.$store.commit('CHANGE_END_OF_EQUATION', true);
-      this.endOfEquation = true;
-      this.$store.dispatch('setBool', this.endOfEquation)
-      this.$store.state.endOfEquation = true;
       this.content = '';
       this.input = null;
-      this.answer = null;
       this.operator = null;
       this.operatorClicked = false;
-      this.endOfEquation = false;
+      this.eqution = [];
     },
 
     getAnswer(){
       this.content = this.answer;
-      this.equationString(this.content);
+      //this.equationString(this.content);
+      this.equationString('ANS');
     },
 
     del(){
@@ -132,6 +127,7 @@ export default {
       this.operator = (a, b) => a - b;
       this.input = this.content
       this.equationString('-')
+
     },
     add(){
       if(this.operator !== null){
@@ -143,21 +139,32 @@ export default {
       this.equationString('+')
     },
     equal(){
-      this.content = `${this.operator(parseFloat(this.content), parseFloat(this.input))}`;
+      this.content = `${this.operator(parseFloat(this.input), parseFloat(this.content))}`;
       this.input = null;
       this.answer = this.content
-      this.equationString(`= ${this.content}`)
-      this.$store.dispatch('setBool', this.endOfEquation)
-      //this.$store.commit('CHANGE_END_OF_EQUATION', true);
     },
     equationString(equ){
       this.eqution.push(equ)
-      this.submit(equ)
     },
-    submit(equ) {
-      this.$store.dispatch('createEquationList', equ)
-    }
 
+    submit() {
+      let stringWord = ''
+      let tempString = ''
+
+      this.content = `${this.operator(parseFloat(this.input), parseFloat(this.content))}`;
+      this.input = null;
+      this.answer = this.content;
+      this.equationString(`= ${this.content}`);
+
+      for(let i = 0; i <= this.eqution.length -1; i++) {
+        tempString = stringWord
+        stringWord = `${tempString} ${this.eqution[i]}`;
+      }
+      if(stringWord !== ''){
+        this.$store.dispatch('createEquationList', stringWord)
+      }
+      this.eqution = [];
+    },
   }
 }
 
