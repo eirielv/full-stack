@@ -28,39 +28,13 @@ export default {
     }
   },
   methods: {
-    fetchList(){
-      this.equation = this.$store.state.equations
-      },
-
     clearLogg(){
       document.getElementById("orderedList").innerHTML = "";
       this.$store.commit('CLEAR_LOGG')
     }
   },
   computed: {
-    /*
-    createLineInList() {
-      let stringWord = null
-      for (let i = 0; i <= this.storeList.length; i++) {
-        stringWord = this.storeList.toString();
-        this.equation.push(stringWord)
-      }
-    },
 
-     */
-
-    /*storeList(){
-
-      for (let item in this.$store.state.equations) {
-        this.loggLine.push(item.toString())
-
-      }
-      for(let i = 0; i < this.loggLine; i++){
-        this.logString += ` ${i} `;
-      }
-
-
-    },*/
   }
 }
 

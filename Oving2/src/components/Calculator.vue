@@ -7,7 +7,6 @@
       </p>
     </div>
 
-    <!--<button class="edits" @click = clear() id="clear">C</button>-->
     <button class="calcbtn edits" @click = "clear()" id="clear">C</button>
     <button class="calcbtn edits" @click = "getAnswer()" id="answer">ANS</button>
     <button class="calcbtn edits" @click = "del()" id="delete">DEL</button>
@@ -57,7 +56,6 @@ export default {
 
     getAnswer(){
       this.content = this.answer;
-      //this.equationString(this.content);
       this.equationString('ANS');
     },
 
@@ -173,24 +171,6 @@ export default {
 
 
 <style scoped>
-
-/*
-  button{
-    background: #ededed;
-    border: 1px solid #ccc;
-    padding: 10px 30px;
-    cursor: pointer;
-  }
-
-  button:focus{
-    background: #e5e5e5;
-    outline: none;
-    -webkit-box-shadow: inset 0 0 5px #c1c1c1;
-    -moz-box-shadow: inset 0 0 5px #c1c1c1;
-    box-shadow: inset 0 0 5px #c1c1c1;
-  }
-  /*
- */
 
   /*
   ---KLASSER---
