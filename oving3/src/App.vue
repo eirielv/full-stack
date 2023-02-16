@@ -1,14 +1,20 @@
 <script setup>
 import Calculator from './components/Calculator.vue'
 import Logg from "@/components/Logg.vue";
+import ContactForm from "@/components/ContactForm.vue";
 </script>
 
 <template>
   <div id="layout">
-    <main>
-      <Calculator/>
-      <Logg/>
-    </main>
+    <header>
+      <div>
+        <nav>
+          <RouterLink to="/">CALCULATOR</RouterLink> |
+          <RouterLink to="/contackForm">CONTACTFORM</RouterLink>
+        </nav>
+      </div>
+    </header>
+    <RouterView />
   </div>
 </template>
 
@@ -17,7 +23,7 @@ import Logg from "@/components/Logg.vue";
   justify-content: center;
 }
 
-.nav{
+nav{
 
 }
 </style>
