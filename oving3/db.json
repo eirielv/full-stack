@@ -1,1 +1,16 @@
-
+{
+  "feedback": [
+    {
+      "name": "Eirik",
+      "email": "eirik.org@gmail.co",
+      "message": "Not too shabby",
+      "id": 1
+    },
+    {
+      "name": "Eirik",
+      "email": "eirik.org@gmail.com",
+      "message": "Den er veldig kul!",
+      "id": 2
+    }
+  ]
+}

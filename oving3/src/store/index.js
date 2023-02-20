@@ -1,9 +1,7 @@
-import { createStore} from 'vuex'
+import { createStore } from 'vuex'
+import ContactService from "@/services/ContactService";
 
 export default createStore({
-    /*
-    TODO få logg.vue til å snakke med calculator på ønskelig måte, og få loggen til å printe ut en array med strings
-     */
     
     state: {
         logs:{
@@ -30,6 +28,9 @@ export default createStore({
 /*
 actions calls mutations
  */
+    /*
+    TODO: add action in store that stores forms information if the form is not submitted
+     */
     actions: {
         createEquationList({ commit }, list){
             return commit('SET_EQUATION', list)
@@ -37,8 +38,18 @@ actions calls mutations
 
         fetchEquations(context) {
 
-            axios.get('/api/calculator')
             context.commit('SET_EQUATION', )
+        },
+        submitFeedback({ commit }, feedback) {
+
+            ContactService.postFeedback(feedback)
+                .then(function(response) {
+                    console.log('Response', response)
+                })
+                .catch(function(error) {
+                    console.log('Error', error)
+                })
+
         }
     },
 })

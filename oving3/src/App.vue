@@ -1,7 +1,5 @@
 <script setup>
-import Calculator from './components/Calculator.vue'
-import Logg from "@/components/Logg.vue";
-import ContactForm from "@/components/ContactForm.vue";
+import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
@@ -10,7 +8,7 @@ import ContactForm from "@/components/ContactForm.vue";
       <div>
         <nav>
           <RouterLink to="/">CALCULATOR</RouterLink> |
-          <RouterLink to="/contackForm">CONTACTFORM</RouterLink>
+          <RouterLink to='/contactForm'>CONTACTFORM</RouterLink>
         </nav>
       </div>
     </header>

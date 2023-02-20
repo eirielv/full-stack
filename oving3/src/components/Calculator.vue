@@ -6,7 +6,6 @@
         {{content || '--'}}
       </p>
     </div>
-
     <button class="calcbtn edits" @click = "clear()" id="clear">C</button>
     <button class="calcbtn edits" @click = "getAnswer()" id="answer">ANS</button>
     <button class="calcbtn edits" @click = "del()" id="delete">DEL</button>
